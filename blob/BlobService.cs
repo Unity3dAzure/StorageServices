@@ -93,6 +93,12 @@ namespace Unity3dAzure.StorageServices
 			request.AddBody (bytes, contentType);
 
 			yield return request.request.Send ();
+
+			#if UNITY_EDITOR
+			while (request.request.responseCode == -1L) {
+			}
+			#endif
+				
 			request.Result (callback);
 		}
 	}

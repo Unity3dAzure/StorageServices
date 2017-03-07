@@ -6,6 +6,9 @@ You can also store Unity Asset Bundles to load Prefabs with referenced scripts t
 * Unity v5.5+
  - [UnityWebRequest](https://docs.unity3d.com/Manual/UnityWebRequest.html) and [JsonUtility](https://docs.unity3d.com/ScriptReference/JsonUtility.html) features are used. Unity will be extending platform support for UnityWebRequest so keep Unity up to date if you need to support these additional platforms.
 
+## Azure Blob Storage Demos for Unity 5.5
+Try the [Azure Storage Services Demos](https://github.com/Unity3dAzure/StorageServicesDemo) project for Unity v5.5 on Mac / Windows. (The demo project has got everything already bundled in and does not require any additional assets to work. Just wire it up with your Azure Storage Service and public Blob container and run it right inside the Unity Editor.)
+
 ## How to setup Storage Services with a new Unity project
 1. [Download StorageServices](https://github.com/Unity3dAzure/StorageServices/archive/master.zip)  
 	* Copy 'StorageServices' into project `Assets` folder.
