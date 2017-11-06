@@ -1,64 +1,64 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace Unity3dAzure.StorageServices
-{
-	[Serializable]
-	[XmlRoot ("EnumerationResults")]
-	public class BlobResults
-	{
-		[XmlAttribute ("ServiceEndpoint")]
-		public string ServiceEndpoint;
+namespace Azure.StorageServices {
+  [Serializable]
+  [XmlRoot("EnumerationResults")]
 
-		[XmlAttribute ("ContainerName")]
-		public string ContainerName;
+  public class BlobResults {
+    [XmlAttribute("ServiceEndpoint")]
+    public string ServiceEndpoint;
 
-		[XmlArray ("Blobs")]
-		public Blob[] Blobs;
-	}
+    [XmlAttribute("ContainerName")]
+    public string ContainerName;
 
-	[Serializable]
-	public class Blob
-	{
-		public string Name;
+    [XmlArray("Blobs")]
+    public Blob[] Blobs;
+  }
 
-		[XmlElement ("Properties")]
-		public BlobProperties Properties;
-	}
+  [Serializable]
+  public class Blob {
+    public string Name;
 
-	[Serializable]
-	public class BlobProperties
-	{
-		[XmlElement ("Last-Modified")]
-		public string LastModified;
+    [XmlElement("Properties")]
+    public BlobProperties Properties;
+  }
 
-		public string Etag;
+  [Serializable]
+  public class BlobProperties {
+    [XmlElement("Last-Modified")]
+    public string LastModified;
 
-		[XmlElement ("Content-Length")]
-		public string ContentLength;
+    public string Etag;
 
-		[XmlElement ("Content-Type")]
-		public string ContentType;
+    [XmlElement("Content-Length")]
+    public string ContentLength;
 
-		[XmlElement ("Content-Encoding")]
-		public string ContentEncoding;
+    [XmlElement("Content-Type")]
+    public string ContentType;
 
-		[XmlElement ("Content-Language")]
-		public string ContentLanguage;
+    [XmlElement("Content-Encoding")]
+    public string ContentEncoding;
 
-		[XmlElement ("Content-MD5")]
-		public string ContentMD5;
+    [XmlElement("Content-Language")]
+    public string ContentLanguage;
 
-		[XmlElement ("Cache-Control")]
-		public string CacheControl;
+    [XmlElement("Content-MD5")]
+    public string ContentMD5;
 
-		[XmlElement ("Content-Disposition")]
-		public string ContentDisposition;
+    [XmlElement("Cache-Control")]
+    public string CacheControl;
 
-		public string BlobType;
-		public string LeaseStatus;
-		public string LeaseState;
-		public bool ServerEncrypted;
-	}
+    [XmlElement("Content-Disposition")]
+    public string ContentDisposition;
+
+    public string BlobType;
+    public string LeaseStatus;
+    public string LeaseState;
+    public bool ServerEncrypted;
+  }
 }
