@@ -1,8 +1,9 @@
-﻿namespace Unity3dAzure.StorageServices
-{
-	public enum ResType
-	{
-		container,
-		blob
-	}
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+namespace Azure.StorageServices {
+  public enum ResType {
+    container,
+    blob
+  }
 }
