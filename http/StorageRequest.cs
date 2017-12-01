@@ -6,10 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace Azure.StorageServices {
   public sealed class StorageRequest : RestRequest {
     public StorageRequest(string url, Method method) : base(url, method) {
+    }
+
+    public StorageRequest(UnityWebRequest request) : base(request) {
     }
 
     public void AuthorizeRequest(StorageServiceClient client, Method method, string resourcePath = "", Dictionary<string, string> queryParams = null, Dictionary<string, string> headers = null, int contentLength = 0) {
