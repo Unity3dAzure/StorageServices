@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using RESTClient;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Azure.StorageServices {
-  public class StorageServiceClient {
+  public sealed class StorageServiceClient : RestClient {
     private string account;
 
     public string Account {
@@ -30,27 +32,54 @@ namespace Azure.StorageServices {
       }
     }
 
+    public StorageServiceClient(string url, string accessKey, string version = "2017-04-17", string account = "") : base(url) {
+      this.version = version;
+      if (!string.IsNullOrEmpty(accessKey)) {
+        this.key = Convert.FromBase64String(accessKey);
+      }
+      if (!string.IsNullOrEmpty(account)) {
+        this.account = account;
+      } else {
+        this.account = GetAccountName(url);
+      }
+    }
+
     /// <summary>
-    /// Initializes a new instance of the <see cref="Unity3dAzure.StorageServices.StorageServiceClient"/> class.
+    /// Creates a new instance of the <see cref="Unity3dAzure.StorageServices.StorageServiceClient"/> class.
     /// </summary>
     /// <param name="account">Storage account name.</param>
     /// <param name="accessKey">Access key.</param>
-    public StorageServiceClient(string account, string accessKey, string version = "2016-05-31") {
-      this.account = account;
-      this.key = Convert.FromBase64String(accessKey);
-      this.version = version;
-    }
-
-    public string PrimaryEndpoint() {
-      return "https://" + account + ".blob.core.windows.net/";
-    }
-
-    public string SecondaryEndpoint() {
-      return "https://" + account + "-secondary.blob.core.windows.net/";
+    public static StorageServiceClient Create(string account, string accessKey, string version = "2017-04-17") {
+      string url = GetPrimaryEndpoint(account);
+      return new StorageServiceClient(url, accessKey, version, account);
     }
 
     public BlobService GetBlobService() {
       return new BlobService(this);
+    }
+
+    public string PrimaryEndpoint() {
+      return GetPrimaryEndpoint(account);
+    }
+
+    public string SecondaryEndpoint() {
+      return GetSecondaryEndpoint(account);
+    }
+
+    private static string GetPrimaryEndpoint(string account) {
+      return "https://" + account + ".blob.core.windows.net/";
+    }
+
+    private static string GetSecondaryEndpoint(string account) {
+      return "https://" + account + ".blob.core.windows.net/";
+    }
+
+    private string GetAccountName(string url) {
+      var match = Regex.Match(url, @"^https?:\/\/([a-z0-9]+)", RegexOptions.IgnoreCase);
+      if (match.Groups.Count == 2 && match.Groups[1].Value.Length > 0) {
+        return match.Groups[1].Value;
+      }
+      return url;
     }
 
   }
