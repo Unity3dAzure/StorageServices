@@ -44,7 +44,7 @@ namespace Azure.StorageServices {
 
     public static StorageRequest GetAuthorizedStorageRequestAssetBundle(StorageServiceClient client, string resourcePath = "", Dictionary<string, string> queryParams = null, Dictionary<string, string> headers = null, int contentLength = 0) {
       string requestUrl = RequestUrl(client, queryParams, resourcePath);
-      StorageRequest request = new StorageRequest(UnityWebRequest.GetAssetBundle(requestUrl));
+      StorageRequest request = new StorageRequest(UnityWebRequestAssetBundle.GetAssetBundle(requestUrl));
       request.AuthorizeRequest(client, Method.GET, resourcePath, queryParams, headers, contentLength);
       return request;
     }
